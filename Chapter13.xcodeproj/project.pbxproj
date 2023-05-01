@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E42962F329FF43AB00F4A115 /* BasicLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42962F229FF43AB00F4A115 /* BasicLists.swift */; };
+		E42962F529FF43EF00F4A115 /* GroupedLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42962F429FF43EF00F4A115 /* GroupedLists.swift */; };
+		E42962F729FF470000F4A115 /* DeleteMoveLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42962F629FF470000F4A115 /* DeleteMoveLists.swift */; };
+		E42962F929FF4A1B00F4A115 /* CustomSwipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42962F829FF4A1B00F4A115 /* CustomSwipes.swift */; };
+		E42962FC29FF775B00F4A115 /* CascadiaClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42962FB29FF775B00F4A115 /* CascadiaClasses.swift */; };
 		E4C02AC129FECE1400B8ACA9 /* Chapter13App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C02AC029FECE1400B8ACA9 /* Chapter13App.swift */; };
 		E4C02AC329FECE1400B8ACA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C02AC229FECE1400B8ACA9 /* ContentView.swift */; };
 		E4C02AC529FECE1500B8ACA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4C02AC429FECE1500B8ACA9 /* Assets.xcassets */; };
@@ -14,6 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E42962F229FF43AB00F4A115 /* BasicLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicLists.swift; sourceTree = "<group>"; };
+		E42962F429FF43EF00F4A115 /* GroupedLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedLists.swift; sourceTree = "<group>"; };
+		E42962F629FF470000F4A115 /* DeleteMoveLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMoveLists.swift; sourceTree = "<group>"; };
+		E42962F829FF4A1B00F4A115 /* CustomSwipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwipes.swift; sourceTree = "<group>"; };
+		E42962FB29FF775B00F4A115 /* CascadiaClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadiaClasses.swift; sourceTree = "<group>"; };
 		E4C02ABD29FECE1400B8ACA9 /* Chapter13.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chapter13.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4C02AC029FECE1400B8ACA9 /* Chapter13App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter13App.swift; sourceTree = "<group>"; };
 		E4C02AC229FECE1400B8ACA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +42,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E42962FA29FF4BD700F4A115 /* Demos */ = {
+			isa = PBXGroup;
+			children = (
+				E42962F229FF43AB00F4A115 /* BasicLists.swift */,
+				E42962F429FF43EF00F4A115 /* GroupedLists.swift */,
+				E42962F629FF470000F4A115 /* DeleteMoveLists.swift */,
+				E42962F829FF4A1B00F4A115 /* CustomSwipes.swift */,
+			);
+			path = Demos;
+			sourceTree = "<group>";
+		};
 		E4C02AB429FECE1400B8ACA9 = {
 			isa = PBXGroup;
 			children = (
@@ -53,6 +74,8 @@
 			children = (
 				E4C02AC029FECE1400B8ACA9 /* Chapter13App.swift */,
 				E4C02AC229FECE1400B8ACA9 /* ContentView.swift */,
+				E42962FB29FF775B00F4A115 /* CascadiaClasses.swift */,
+				E42962FA29FF4BD700F4A115 /* Demos */,
 				E4C02AC429FECE1500B8ACA9 /* Assets.xcassets */,
 				E4C02AC629FECE1500B8ACA9 /* Preview Content */,
 			);
@@ -138,6 +161,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4C02AC329FECE1400B8ACA9 /* ContentView.swift in Sources */,
+				E42962F329FF43AB00F4A115 /* BasicLists.swift in Sources */,
+				E42962FC29FF775B00F4A115 /* CascadiaClasses.swift in Sources */,
+				E42962F929FF4A1B00F4A115 /* CustomSwipes.swift in Sources */,
+				E42962F729FF470000F4A115 /* DeleteMoveLists.swift in Sources */,
+				E42962F529FF43EF00F4A115 /* GroupedLists.swift in Sources */,
 				E4C02AC129FECE1400B8ACA9 /* Chapter13App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
