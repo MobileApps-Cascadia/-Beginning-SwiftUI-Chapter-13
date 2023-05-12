@@ -32,11 +32,12 @@ struct CascadiaClassesView: View {
 
     func enroll(_ course: Course) {
         if enrolledCourses.contains(course) {
-            return // already enrolled
+            enrolledCourses.remove(course)
+            alertMessage = "You have successfully unenrolled from \(course.title)."
+        } else {
+            enrolledCourses.insert(course)
+            alertMessage = "Congratulations, you have enrolled in \(course.title)!"
         }
-        
-        enrolledCourses.insert(course)
-        alertMessage = "Congratulations, you have enrolled in \(course.title)!"
         showAlert = true
     }
 
@@ -60,13 +61,13 @@ struct CascadiaClassesView: View {
                         .onTapGesture {
                             enroll(course)
                         }
-                        .swipeActions {
+                        .swipeActions(edge: .trailing) {
                             Button(action: {
                                 enroll(course)
                             }) {
-                                Label("Enroll", systemImage: "plus.circle.fill")
+                                Label(enrolledCourses.contains(course) ? "Unenroll" : "Enroll", systemImage: "person.crop.circle")
                             }
-                            .tint(.green)
+                            .tint(enrolledCourses.contains(course) ? .red : .green)
                         }
                     }
                 }
@@ -79,7 +80,6 @@ struct CascadiaClassesView: View {
     }
 }
 
-
 // Like "IT-MOB", or "ENG" (English) or "MATH"
 struct Discipline: Identifiable {
     let id = UUID()
@@ -87,6 +87,9 @@ struct Discipline: Identifiable {
     let abbreviation: String
     var courses: [Course]
 }
+
+// Like "IT-MOB 381" or "ENG 101" or
+
 
 // Like "IT-MOB 381" or "ENG 101" or "MATH &107"
 struct Course: Identifiable, Equatable, Hashable {
@@ -104,7 +107,7 @@ struct Course: Identifiable, Equatable, Hashable {
     }
 }
 
-
+@available(iOS 15.0, *)
 struct CascadiaClassesView_Previews: PreviewProvider {
     static var previews: some View {
         CascadiaClassesView()
