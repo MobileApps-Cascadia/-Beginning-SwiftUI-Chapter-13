@@ -9,26 +9,30 @@ import SwiftUI
 
 struct CascadiaClassesView: View {
     
+    //@State private var multiSelection = Set<UUID>()
  
     var body: some View {
-        VStack {
-            Text("Cascadia Classes")
-                .font(.largeTitle)
-            List() {
-                ForEach(disciplines) { discipline in
-                    ForEach(discipline.courseList) { course in
-                        HStack{
-                            Image(systemName: course.enrolled ? "checkmark.circle" : "circle")
-                                .frame(alignment: .trailing)
-                            Text("\(discipline.abbreviation) \(course.courseNumber): \(course.title)")
-                            
+        NavigationView{
+            VStack {
+                List(/*selection: $multiSelection*/) {
+                    ForEach(disciplines) { discipline in
+                        ForEach(discipline.courseList) { course in
+                            HStack{
+                                Image(systemName: course.enrolled ? "checkmark.circle.fill" : "circle")
+                                    .frame(alignment: .trailing)
+                                    .foregroundColor(course.enrolled ? Color.accentColor : Color.secondary)
+                                Text("\(discipline.abbreviation) \(course.courseNumber): \(course.title)")
+                                
+                            }
                         }
                     }
                 }
+                .navigationTitle("Cascadia Classes")
+                //.toolbar{ EditButton() }
+                
             }
-            
+            .padding()
         }
-        .padding()
     }
 }
 
