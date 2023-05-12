@@ -14,7 +14,9 @@ struct CascadiaClassesView: View {
         VStack {
             Text("Cascadia Classes")
                 .font(.largeTitle)
-
+            List(disciplines) {
+                Text($0.name)
+            }
             
         }
         .padding()
@@ -26,7 +28,11 @@ struct CascadiaClassesView: View {
 struct Discipline: Identifiable {
     let id = UUID()
     // add properties here
+    let name: String
+    let abbreviation: String
+
 }
+var disciplines = [Discipline(name: "Information Technology - Mobile", abbreviation: "IT-MOB"),Discipline(name: "English", abbreviation: "ENG"),Discipline(name: "Math", abbreviation: "MATH")]
 
 // Like "IT-MOB 381" or "ENG 101" or "MATH &107"
 struct Course: Identifiable {
