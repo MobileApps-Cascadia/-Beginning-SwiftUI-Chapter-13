@@ -14,8 +14,17 @@ struct CascadiaClassesView: View {
         VStack {
             Text("Cascadia Classes")
                 .font(.largeTitle)
-            List(disciplines) {
-                Text($0.name)
+            List() {
+                ForEach(disciplines) { discipline in
+                    ForEach(discipline.courseList) { course in
+                        HStack{
+                            Image(systemName: course.enrolled ? "checkmark.circle" : "circle")
+                                .frame(alignment: .trailing)
+                            Text("\(discipline.abbreviation) \(course.courseNumber): \(course.title)")
+                            
+                        }
+                    }
+                }
             }
             
         }
@@ -30,14 +39,31 @@ struct Discipline: Identifiable {
     // add properties here
     let name: String
     let abbreviation: String
+    let courseList: [Course]
 
 }
-var disciplines = [Discipline(name: "Information Technology - Mobile", abbreviation: "IT-MOB"),Discipline(name: "English", abbreviation: "ENG"),Discipline(name: "Math", abbreviation: "MATH")]
+var disciplines = [Discipline(name: "Information Technology - Mobile", abbreviation: "IT-MOB",
+                              courseList: [
+                                Course(title: "Basics of Web Authoring", courseNumber: 112, enrolled: false),
+                                Course(title: "Introduction to Programming", courseNumber: 115, enrolled: false),
+                                Course(title: "Network Infrastructure", courseNumber: 135, enrolled: false)]),
+                   Discipline(name: "English", abbreviation: "ENGL",
+                              courseList: [
+                                Course(title: "Introduction to Creative Writing", courseNumber: 115, enrolled: false),
+                                Course(title: "Film and Literature", courseNumber: 221, enrolled: false),                                Course(title: "English Composition 1", courseNumber: 101, enrolled: false)]),
+                   Discipline(name: "Math", abbreviation: "MATH",
+                              courseList: [
+                                Course(title: "Algebra for Precalculus", courseNumber: 95, enrolled: false),
+                                Course(title: "Precalculus 1", courseNumber: 141, enrolled: false),
+                                Course(title: "Introduction to Statistics", courseNumber: 146, enrolled: false)])]
 
 // Like "IT-MOB 381" or "ENG 101" or "MATH &107"
 struct Course: Identifiable {
     let id = UUID()
     // add properties here
+    let title: String
+    let courseNumber: Int
+    let enrolled: Bool
 }
 
 struct CascadiaClassesView_Previews: PreviewProvider {
