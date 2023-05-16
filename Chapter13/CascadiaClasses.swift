@@ -125,9 +125,6 @@ struct Discipline: Identifiable {
     var courses: [Course]
 }
 
-// Like "IT-MOB 381" or "ENG 101" or
-
-
 // Like "IT-MOB 381" or "ENG 101" or "MATH &107"
 struct Course: Identifiable, Equatable, Hashable {
     let id = UUID()
