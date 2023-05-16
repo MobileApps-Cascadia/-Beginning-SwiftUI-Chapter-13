@@ -29,56 +29,93 @@ struct CascadiaClassesView: View {
     @State private var enrolledCourses: Set<Course> = []
     @State private var showAlert = false
     @State private var alertMessage = ""
-
+    @State private var selectedCourses: Set<Course> = []
+    @State private var isInSelectionMode = false
+    
     func enroll(_ course: Course) {
         if enrolledCourses.contains(course) {
             enrolledCourses.remove(course)
-            alertMessage = "You have successfully unenrolled from \(course.title)."
+            alertMessage = "You have unenrolled from \(course.title)."
         } else {
             enrolledCourses.insert(course)
             alertMessage = "Congratulations, you have enrolled in \(course.title)!"
         }
         showAlert = true
     }
+    
+    func enrollSelectedCourses() {
+        for course in selectedCourses {
+            enroll(course)
+        }
+        selectedCourses = []
+        isInSelectionMode = false
+    }
 
     var body: some View {
         VStack {
-            Text("Cascadia Classes")
-                .font(.largeTitle)
-
-            ForEach(disciplines) { discipline in
-                Section(header: Text(discipline.name)) {
-                    ForEach(discipline.courses) { course in
-                        HStack {
-                            Text("\(discipline.abbreviation) \(course.courseNumber):")
-                            Text(course.title)
-                            Spacer()
-                            if enrolledCourses.contains(course) {
-                                Image(systemName: "checkmark")
+            if !isInSelectionMode {
+                Text("Cascadia Classes")
+                    .font(.largeTitle)
+            } else {
+                HStack {
+                    Button("Cancel") {
+                        selectedCourses = []
+                        isInSelectionMode = false
+                    }
+                    Spacer()
+                    Button("Enroll") {
+                        enrollSelectedCourses()
+                    }
+                }
+                .padding()
+            }
+            
+            List {
+                ForEach(disciplines) { discipline in
+                    Section(header: Text(discipline.name)) {
+                        ForEach(discipline.courses) { course in
+                            HStack {
+                                if isInSelectionMode {
+                                    Image(systemName: selectedCourses.contains(course) ? "checkmark.circle.fill" : "circle")
+                                        .onTapGesture {
+                                            if selectedCourses.contains(course) {
+                                                selectedCourses.remove(course)
+                                            } else {
+                                                selectedCourses.insert(course)
+                                            }
+                                        }
+                                }
+                                Text("\(discipline.abbreviation) \(course.courseNumber):")
+                                Text(course.title)
+                                Spacer()
+                                if enrolledCourses.contains(course) {
+                                    Button(action: {
+                                        enroll(course)
+                                    }) {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(.green)
+                                    }
+                                } else {
+                                    Button(action: {
+                                        enroll(course)
+                                    }) {
+                                        Text("Enroll")
+                                    }
+                                }
                             }
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            enroll(course)
-                        }
-                        .swipeActions(edge: .trailing) {
-                            Button(action: {
-                                enroll(course)
-                            }) {
-                                Label(enrolledCourses.contains(course) ? "Unenroll" : "Enroll", systemImage: "person.crop.circle")
-                            }
-                            .tint(enrolledCourses.contains(course) ? .red : .green)
                         }
                     }
                 }
             }
+            
+            Spacer()
         }
-        .padding()
         .alert(isPresented: $showAlert) {
-            Alert(title: Text(alertMessage))
+            Alert(title: Text("Enrollment"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
     }
 }
+
 
 // Like "IT-MOB", or "ENG" (English) or "MATH"
 struct Discipline: Identifiable {
