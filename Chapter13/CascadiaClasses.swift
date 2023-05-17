@@ -26,6 +26,8 @@ struct CascadiaClassesView: View {
     
     //@State private var multiSelection = Set<UUID>()
     @State var showAlert = false
+    @State var course = ""
+    @State var enroll = ""
     var body: some View {
         NavigationView{
             VStack {
@@ -41,10 +43,16 @@ struct CascadiaClassesView: View {
                             .swipeActions(edge: .trailing){
                                 Button ("Change Enrollment"){
                                     course.enrolled.toggle()
+                                    self.course = "\(discipline.abbreviation) \(course.courseNumber): \(course.title)"
+                                    if(course.enrolled){
+                                        self.enroll = "enrolled"
+                                    }else{
+                                        self.enroll = "unenrolled"
+                                    }
                                     showAlert = true
                                 }
                             }
-                            .alert("You have enrolled in \(discipline.abbreviation) \(course.courseNumber): \(course.title)", isPresented: $showAlert) {
+                            .alert("You have \(self.enroll) in \(self.course)", isPresented: $showAlert) {
                                 Button("OK", role: .cancel) { }
                             }
                         }
